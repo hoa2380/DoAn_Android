@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.lession07_restapi.models.Product;
 import com.example.lession07_restapi.responses.ProductResponse;
 import com.example.lession07_restapi.service.ProductService;
@@ -64,6 +65,7 @@ public class ProductDetail extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Product product = response.body().product;
                     System.out.println(product);
+                    Glide.with(getApplicationContext()).load(product.image).into(image);
                     name.setText(product.name);
                     price.setText(product.price + "₫");
                     desc.setText(product.desc);
