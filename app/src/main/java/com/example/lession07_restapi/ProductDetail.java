@@ -63,16 +63,16 @@ public class ProductDetail extends AppCompatActivity {
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
                     Product product = response.body().product;
+                    System.out.println(product);
                     name.setText(product.name);
                     price.setText(product.price + "₫");
-                    category.setText(product.category.name + "");
                     desc.setText(product.desc);
                 }
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-
+                System.out.println(t.toString());
             }
         });
     }

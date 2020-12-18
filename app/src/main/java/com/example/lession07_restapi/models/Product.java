@@ -19,8 +19,6 @@ public class Product {
     @SerializedName("price")
     @Expose
     public int price;
-    @SerializedName("vote")
-    @Expose
     public Category category;
     @SerializedName("created_at")
     @Expose

@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface BrandService {
-    @GET("brands")
+    @GET("brand")
     Call<BrandResponse> getBrand();
 }
