@@ -3,6 +3,7 @@ package com.example.lession07_restapi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     RecyclerView main_rv;
     ProductService productService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductsResponse> call, Response<ProductsResponse> response) {
                 if (response.isSuccessful()) {
-                    main_rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                    main_rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
                     //item change position when fast scroll up
                     main_rv.setItemAnimator(null);
                     ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(), response.body().products, id -> {
