@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fashi_shop.Adapter.AdapterNoiBat;
 import com.example.fashi_shop.Adapter.ProductAdapter;
 import com.example.fashi_shop.R;
 import com.example.fashi_shop.View.ChiTietSanPham.ChiTietSanPhamActivity;

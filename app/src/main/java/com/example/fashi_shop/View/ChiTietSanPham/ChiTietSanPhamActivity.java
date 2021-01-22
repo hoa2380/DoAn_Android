@@ -29,7 +29,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView price;
     private TextView brand;
     private TextView category;
-    private RatingBar vote;
     private TextView desc;
 
     ProductService productService;
@@ -43,23 +42,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         price = findViewById(R.id.product_detail_price);
         brand = findViewById(R.id.product_detail_brand);
         category = findViewById(R.id.product_detail_category);
-        vote = findViewById(R.id.product_detail_vote);
-        desc = findViewById(R.id.product_detail_desc);
-
-        productService = ApiClient.getProductService();
-        loadProduct(getIntent().getLongExtra("productID", 0));
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.layout_chitietsanpham);
-        image = findViewById(R.id.ivItemDetailImage);
-        name = findViewById(R.id.product_detail_name);
-        price = findViewById(R.id.product_detail_price);
-        brand = findViewById(R.id.product_detail_brand);
-        category = findViewById(R.id.product_detail_category);
-        vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
 
         productService = ApiClient.getProductService();
@@ -97,5 +79,4 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
     }
-
 }

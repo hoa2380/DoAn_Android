@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3E3E3E"
     android:orientation="vertical"
     tools:context=".View.ChiTietSanPham.ChiTietSanPhamActivity">
 
@@ -26,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên sản phẩm"
-            android:textColor="@color/white"
+            android:textColor="@color/black_600"
             android:textSize="23sp" />
 
         <TextView
@@ -34,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="23.000đ"
-            android:textColor="@color/white"
+            android:textColor="@color/black_600"
             android:textSize="19sp" />
     </LinearLayout>
 
@@ -50,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="Chi tiết sản phẩm"
-            android:textColor="@color/white"
+            android:textColor="@color/black_600"
             android:textSize="19sp" />
 
         <LinearLayout
@@ -63,14 +62,14 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:text="Kho:  "
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -84,14 +83,14 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:text="Thương Hiệu"
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/product_detail_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -105,7 +104,7 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:text="Danh Mục"
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
 
             <TextView
@@ -113,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/black_600"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -145,7 +144,7 @@
             android:id="@+id/product_detail_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black_600"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
