@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "lession07-restAPI"
+rootProject.name = "login_mvp_demo"
