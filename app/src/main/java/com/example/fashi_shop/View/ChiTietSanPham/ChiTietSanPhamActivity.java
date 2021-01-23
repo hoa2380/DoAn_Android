@@ -86,7 +86,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     System.out.println(product);
                     Glide.with(getApplicationContext()).load(product.image).into(image);
                     name.setText(product.name);
-                    price.setText(product.price + "₫");
+                    price.setText(product.price + " ₫");
                     desc.setText(product.desc);
                 }
             }
