@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -31,6 +33,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView category;
     private RatingBar vote;
     private TextView desc;
+    ImageButton ibXemThem;
+    Boolean check = false;
 
     ProductService productService;
 
@@ -45,22 +49,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         category = findViewById(R.id.product_detail_category);
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
-
-        productService = ApiClient.getProductService();
-        loadProduct(getIntent().getLongExtra("productID", 0));
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.layout_chitietsanpham);
-        image = findViewById(R.id.ivItemDetailImage);
-        name = findViewById(R.id.product_detail_name);
-        price = findViewById(R.id.product_detail_price);
-        brand = findViewById(R.id.product_detail_brand);
-        category = findViewById(R.id.product_detail_category);
-        vote = findViewById(R.id.product_detail_vote);
-        desc = findViewById(R.id.product_detail_desc);
+        ibXemThem = findViewById(R.id.ibXemThem);
 
         productService = ApiClient.getProductService();
         loadProduct(getIntent().getLongExtra("productID", 0));
@@ -87,7 +76,24 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(product.image).into(image);
                     name.setText(product.name);
                     price.setText(product.price + " ₫");
-                    desc.setText(product.desc);
+                    if (desc.length() > 20) {
+                        ibXemThem.setVisibility(View.GONE);
+                    } else {
+                        ibXemThem.setVisibility(View.VISIBLE);
+
+                        ibXemThem.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                check = !check;
+                                if (check ) {
+                                    desc.setText(product.desc);
+                                }else {
+                                    desc.setText(product.desc.substring(0, 100));
+                                }
+                            }
+                        });
+                    }
+
                 }
             }
 
