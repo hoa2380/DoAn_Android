@@ -16,11 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.fashi_shop.Model.Brand;
+import com.example.fashi_shop.Model.Category;
 import com.example.fashi_shop.Model.Product;
 import com.example.fashi_shop.R;
 import com.example.fashi_shop.responses.BrandResponse;
+import com.example.fashi_shop.responses.CategoryResponse;
 import com.example.fashi_shop.responses.ProductResponse;
 import com.example.fashi_shop.service.BrandService;
+import com.example.fashi_shop.service.CategoryService;
 import com.example.fashi_shop.service.ProductService;
 import com.example.fashi_shop.utils.ApiClient;
 
@@ -33,14 +36,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView name;
     private TextView price;
     private TextView tvBrand;
-    private TextView category;
+    private TextView tvcategory;
     private RatingBar vote;
     private TextView desc;
     ImageButton ibXemThem;
-    Boolean check = false;
+    boolean check = false;
 
     ProductService productService;
     BrandService brandService;
+    CategoryService categoryService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +54,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         name = findViewById(R.id.product_detail_name);
         price = findViewById(R.id.product_detail_price);
         tvBrand = findViewById(R.id.product_detail_brand);
-        category = findViewById(R.id.product_detail_category);
+        tvcategory = findViewById(R.id.product_detail_category);
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
 
         productService = ApiClient.getProductService();
         brandService = ApiClient.getBrandService();
+        categoryService = ApiClient.getCategoryService();
+
 
         loadProduct(getIntent().getLongExtra("productID", 0));
     }
@@ -70,6 +76,24 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    void loadCategory(int id){
+        categoryService.getCategories(id).enqueue(new Callback<CategoryResponse>() {
+            @Override
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
+                if (response.isSuccessful()){
+                    Category category = response.body().category;
+                    System.out.println(category);
+                    tvcategory.setText(category.name);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     void loadBrand(int id){
@@ -102,6 +126,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     price.setText(product.price + " ₫");
                     desc.setText(product.desc.substring(0, 100));
                     loadBrand(product.product_brands_id);
+                    loadCategory(product.categories_id);
                     if (product.desc.length() < 30) {
                         ibXemThem.setVisibility(View.GONE);
                     } else {

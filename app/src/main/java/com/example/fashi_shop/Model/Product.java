@@ -22,6 +22,9 @@ public class Product {
     @SerializedName("product_brands_id")
     @Expose
     public Integer product_brands_id;
+    @SerializedName("categories_id")
+    @Expose
+    public Integer categories_id;
     @SerializedName("created_at")
     @Expose
     public String createdAt;
@@ -38,6 +41,7 @@ public class Product {
                 ", image='" + image + '\'' +
                 ", price=" + price +
                 ", product_brands_id=" + product_brands_id +
+                ", categories_id=" + categories_id +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
