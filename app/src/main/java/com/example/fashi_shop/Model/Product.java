@@ -19,7 +19,9 @@ public class Product {
     @SerializedName("price")
     @Expose
     public int price;
-    public com.example.fashi_shop.Model.Category category;
+    @SerializedName("product_brands_id")
+    @Expose
+    public Integer product_brands_id;
     @SerializedName("created_at")
     @Expose
     public String createdAt;
@@ -35,7 +37,7 @@ public class Product {
                 ", desc='" + desc + '\'' +
                 ", image='" + image + '\'' +
                 ", price=" + price +
-                ", category=" + category +
+                ", product_brands_id=" + product_brands_id +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';

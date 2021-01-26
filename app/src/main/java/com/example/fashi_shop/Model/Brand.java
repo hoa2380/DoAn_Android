@@ -16,4 +16,14 @@ public class Brand {
     @SerializedName("update_at")
     @Expose
     public String updateAt;
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                '}';
+    }
 }
