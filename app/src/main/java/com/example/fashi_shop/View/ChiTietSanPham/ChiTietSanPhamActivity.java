@@ -29,6 +29,7 @@ import com.example.fashi_shop.service.BrandService;
 import com.example.fashi_shop.service.CategoryService;
 import com.example.fashi_shop.service.ProductService;
 import com.example.fashi_shop.utils.ApiClient;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +45,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView desc;
     ImageButton ibXemThem;
     boolean check = false;
+    MaterialToolbar toolbar;
 
     ProductService productService;
     BrandService brandService;
@@ -53,6 +55,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_chitietsanpham);
+        toolbar = findViewById(R.id.toolBarChiTietSanPham);
         image = findViewById(R.id.ivItemDetailImage);
         name = findViewById(R.id.product_detail_name);
         price = findViewById(R.id.product_detail_price);
@@ -61,6 +64,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
+        setSupportActionBar(toolbar);
 
         productService = ApiClient.getProductService();
         brandService = ApiClient.getBrandService();
@@ -73,7 +77,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuchitietsanpham,menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
