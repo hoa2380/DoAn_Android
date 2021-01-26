@@ -1,5 +1,7 @@
 package com.example.fashi_shop.View.ChiTietSanPham;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.fashi_shop.Model.Brand;
@@ -36,7 +39,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView name;
     private TextView price;
     private TextView tvBrand;
-    private TextView tvcategory;
+    private TextView tvCategory;
     private RatingBar vote;
     private TextView desc;
     ImageButton ibXemThem;
@@ -54,7 +57,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         name = findViewById(R.id.product_detail_name);
         price = findViewById(R.id.product_detail_price);
         tvBrand = findViewById(R.id.product_detail_brand);
-        tvcategory = findViewById(R.id.product_detail_category);
+        tvCategory = findViewById(R.id.product_detail_category);
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
@@ -85,7 +88,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Category category = response.body().category;
                     System.out.println(category);
-                    tvcategory.setText(category.name);
+                    tvCategory.setText(category.name);
                 }
             }
 
@@ -138,8 +141,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                                 check = !check;
                                 if (check ) {
                                     desc.setText(product.desc);
+                                    ibXemThem.setImageDrawable(getIconXemThem(R.drawable.ic_keyboard_arrow_up_black_24dp));
                                 }else {
                                     desc.setText(product.desc.substring(0, 100));
+                                    ibXemThem.setImageDrawable(getIconXemThem(R.drawable.ic_keyboard_arrow_down_black_24dp));
                                 }
                             }
                         });
@@ -153,6 +158,16 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 System.out.println(t.toString());
             }
         });
+    }
+
+    private Drawable getIconXemThem(int idDrawable){
+        Drawable drawable;
+        if (Build.VERSION.SDK_INT > 21){
+            drawable = ContextCompat.getDrawable(this, idDrawable);
+        }else {
+            drawable = getResources().getDrawable(idDrawable);
+        }
+        return drawable;
     }
 
 }

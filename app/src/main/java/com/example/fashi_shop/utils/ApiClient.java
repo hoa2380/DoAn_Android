@@ -7,7 +7,7 @@ import com.example.fashi_shop.service.CategoryService;
 import com.example.fashi_shop.service.ProductService;
 
 public  class ApiClient {
-    public static final String BASE_URL = "http://192.168.0.95/DoAnLaravel2020/public/api/";
+    public static final String BASE_URL = "http://192.168.1.12/DoAnLaravel2020/public/api/";
 
     public static ProductService getProductService() {
         return RetrofitClient.getRetrofit(BASE_URL).create(ProductService.class);
