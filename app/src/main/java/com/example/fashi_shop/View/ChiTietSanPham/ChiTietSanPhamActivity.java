@@ -31,6 +31,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView price;
     private TextView brand;
     private TextView category;
+    private RatingBar vote;
     private TextView desc;
     ImageButton ibXemThem;
     Boolean check = false;
@@ -46,13 +47,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         price = findViewById(R.id.product_detail_price);
         brand = findViewById(R.id.product_detail_brand);
         category = findViewById(R.id.product_detail_category);
-<<<<<<< HEAD
-        desc = findViewById(R.id.product_detail_desc);
-=======
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
->>>>>>> 2e0fc2261e3b86c1ebed94c095f3162d23a7f32a
 
         productService = ApiClient.getProductService();
         loadProduct(getIntent().getLongExtra("productID", 0));
@@ -106,4 +103,5 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
     }
+
 }
