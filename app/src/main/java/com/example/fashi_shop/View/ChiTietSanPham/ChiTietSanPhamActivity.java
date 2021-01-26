@@ -76,7 +76,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(product.image).into(image);
                     name.setText(product.name);
                     price.setText(product.price + " ₫");
-                    if (desc.length() > 20) {
+                    desc.setText(product.desc.substring(0, 100));
+                    if (product.desc.length() < 30) {
                         ibXemThem.setVisibility(View.GONE);
                     } else {
                         ibXemThem.setVisibility(View.VISIBLE);
