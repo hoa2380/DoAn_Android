@@ -88,8 +88,8 @@
                 android:id="@+id/toolBarChiTietSanPham"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                android:background="@color/black_600">
+                android:background="@color/black_600"
+                app:layout_collapseMode="pin">
 
             </com.google.android.material.appbar.MaterialToolbar>
 
