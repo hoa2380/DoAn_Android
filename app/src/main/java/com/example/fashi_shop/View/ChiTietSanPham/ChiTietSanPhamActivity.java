@@ -3,7 +3,6 @@ package com.example.fashi_shop.View.ChiTietSanPham;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -86,7 +84,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     void loadCategory(int id){
-        categoryService.getCategories(id).enqueue(new Callback<CategoryResponse>() {
+        categoryService.getCategory(id).enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()){

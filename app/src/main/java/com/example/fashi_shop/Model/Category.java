@@ -22,8 +22,6 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updateAt='" + updateAt + '\'' +
                 '}';
     }
 }
