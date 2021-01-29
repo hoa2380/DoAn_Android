@@ -1,24 +1,35 @@
 package com.example.fashi_shop.View.TrangChu;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 
+import com.example.fashi_shop.Adapter.CategoryAdapter;
 import com.example.fashi_shop.Adapter.ViewPagerAdapter;
+import com.example.fashi_shop.Model.Category;
+import com.example.fashi_shop.Presenter.TrangChu.XuLyMenu.PresenterLogicXuLyMenu;
 import com.example.fashi_shop.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
-public class TrangChuActivity extends AppCompatActivity {
+import java.util.List;
+
+public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
 
     MaterialToolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +39,26 @@ public class TrangChuActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBarTrangChu);
         tabLayout = findViewById(R.id.tabLayoutTrangChu);
         viewPager = findViewById(R.id.viewPagerTrangChu);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        listView = findViewById(R.id.lvMenu);
+
+
         setSupportActionBar(toolbar);
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.grey));
+        drawerToggle.syncState();
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        PresenterLogicXuLyMenu logicXuLyMenu = new PresenterLogicXuLyMenu(this);
+        logicXuLyMenu.LayDanhSachMenu();
 
     }
 
@@ -44,7 +69,17 @@ public class TrangChuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void HienThiDanhSachMenu(List<Category> categoryList) {
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, R.layout.item_category, categoryList);
+        listView.setAdapter(categoryAdapter);
     }
 }

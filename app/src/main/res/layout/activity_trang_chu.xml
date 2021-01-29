@@ -1,80 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.TrangChu.TrangChuActivity"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:context=".View.TrangChu.TrangChuActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <FrameLayout
+        android:id="@+id/flContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolBarTrangChu"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolBarTrangChu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bgsearch"
-                    android:orientation="horizontal">
+                    android:layout_height="?attr/actionBarSize">
 
-                    <Button
-                        style="?android:attr/borderlessButtonStyle"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tìm kiếm"
-                        android:layout_gravity="start"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/grey"
-                        android:textAllCaps="false"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_search_black_24dp"/>
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_marginRight="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_photo_camera_black_24dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bgsearch"
+                            android:orientation="horizontal">
 
-                </LinearLayout>
+                            <Button
+                                style="?android:attr/borderlessButtonStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tìm kiếm"
+                                android:layout_gravity="start"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/grey"
+                                android:textAllCaps="false"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/ic_search_black_24dp"/>
+
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_photo_camera_black_24dp"/>
+
+                        </LinearLayout>
 
 
-            </LinearLayout>
+                    </LinearLayout>
 
-        </com.google.android.material.appbar.MaterialToolbar>
+                </com.google.android.material.appbar.MaterialToolbar>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutTrangChu"
-            android:background="@color/black_600"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMode="scrollable"
-            app:tabIndicatorColor="@color/white"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/grey">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayoutTrangChu"
+                    android:background="@color/black_600"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="scrollable"
+                    app:tabIndicatorColor="@color/white"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextColor="@color/grey">
 
-        </com.google.android.material.tabs.TabLayout>
+                </com.google.android.material.tabs.TabLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerTrangChu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerTrangChu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    </androidx.viewpager.widget.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
-</LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/lvMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_gravity="start">
+
+    </ListView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
