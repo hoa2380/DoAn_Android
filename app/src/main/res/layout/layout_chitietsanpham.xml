@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     tools:context=".View.ChiTietSanPham.ChiTietSanPhamActivity">
 
@@ -39,8 +40,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tên sản phẩm"
+                    android:textColor="@color/primary_text"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/product_detail_price"
@@ -120,6 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chi tiết sản phẩm"
+                    android:textColor="@color/primary_text"
                     android:textStyle="bold"
                     android:textSize="18sp"/>
 
@@ -132,6 +135,7 @@
                     <TextView
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
+                        android:textColor="@color/primary_text"
                         android:text="Thương Hiệu"
                         android:textSize="16dp" />
 
@@ -139,6 +143,7 @@
                         android:id="@+id/product_detail_brand"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
                         android:text="OK"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -152,6 +157,7 @@
                     <TextView
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
+                        android:textColor="@color/primary_text"
                         android:text="Danh Mục"
                         android:textSize="16dp" />
 
@@ -159,6 +165,7 @@
                         android:id="@+id/product_detail_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
                         android:text="0"
                         android:textSize="16dp" />
 
@@ -168,6 +175,7 @@
                     android:id="@+id/product_detail_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/primary_text"
                     android:textSize="18sp" />
 
                 <ImageButton

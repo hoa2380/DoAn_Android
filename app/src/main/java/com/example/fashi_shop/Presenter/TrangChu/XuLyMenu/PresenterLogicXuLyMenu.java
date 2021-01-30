@@ -26,7 +26,6 @@ public class PresenterLogicXuLyMenu implements PresenterXuLyMenu {
 
     @Override
     public void LayDanhSachMenu() {
-
         categoryService = ApiClient.getCategoryService();
         categoryService.getCategories().enqueue(new Callback<CategoriesResponse>() {
             @Override
@@ -34,6 +33,8 @@ public class PresenterLogicXuLyMenu implements PresenterXuLyMenu {
                 if (response.isSuccessful()){
                    List<Category> categories = response.body().categories;
                    viewXuLyMenu.HienThiDanhSachMenu(categories);
+                } else {
+                    Log.e("Code", response.code() + "");
                 }
             }
 

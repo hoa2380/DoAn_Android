@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.example.fashi_shop.Adapter.CategoryAdapter;
@@ -17,6 +22,7 @@ import com.example.fashi_shop.Adapter.ViewPagerAdapter;
 import com.example.fashi_shop.Model.Category;
 import com.example.fashi_shop.Presenter.TrangChu.XuLyMenu.PresenterLogicXuLyMenu;
 import com.example.fashi_shop.R;
+import com.example.fashi_shop.View.SanPhamTheoDanhMuc.SanPhamTheoDanhMucActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -81,5 +87,15 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
     public void HienThiDanhSachMenu(List<Category> categoryList) {
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, R.layout.item_category, categoryList);
         listView.setAdapter(categoryAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("id", categoryList.get(position).id.toString());
+                Intent intent = new Intent(getApplicationContext(), SanPhamTheoDanhMucActivity.class);
+                intent.putExtra("categoriesID", categoryList.get(position).id);
+                intent.putExtra("categoryName", categoryList.get(position).name);
+                startActivity(intent);
+            }
+        });
     }
 }
