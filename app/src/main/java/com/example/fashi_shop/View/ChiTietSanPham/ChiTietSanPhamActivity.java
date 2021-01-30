@@ -3,6 +3,7 @@ package com.example.fashi_shop.View.ChiTietSanPham;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -152,6 +153,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         });
                     }
 
+                } else {
+                    Log.e("Code", response.code() + "");
                 }
             }
 

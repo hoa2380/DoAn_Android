@@ -11,4 +11,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#CCC</color>
     <color name="badge">#ED0F0F</color>
+
+    <color name="primary_text">#252525</color>
 </resources>

@@ -47,11 +47,11 @@ public class NoiBat extends Fragment {
                     recyclerViewNoiBat.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     //item change position when fast scroll up
                     recyclerViewNoiBat.setItemAnimator(null);
-                    ProductAdapter productAdapter = new ProductAdapter(getContext(), response.body().products, id -> {
-                        Intent intent = new Intent(getContext(), ChiTietSanPhamActivity.class);
-                        intent.putExtra("productID",id);
-                        startActivity(intent);
-                    });
+                    ProductAdapter productAdapter = new ProductAdapter(getContext(), response.body().products, R.layout.item_product, id -> {
+                                            Intent intent = new Intent(getContext(), ChiTietSanPhamActivity.class);
+                                            intent.putExtra("productID",id);
+                                            startActivity(intent);
+                                        });
                     recyclerViewNoiBat.setAdapter(productAdapter);
                 } else {
                     Log.e("Code", response.code() + "");
