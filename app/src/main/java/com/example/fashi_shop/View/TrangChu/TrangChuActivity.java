@@ -24,6 +24,7 @@ import com.example.fashi_shop.Model.Category;
 import com.example.fashi_shop.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.fashi_shop.Presenter.TrangChu.XuLyMenu.PresenterLogicXuLyMenu;
 import com.example.fashi_shop.R;
+import com.example.fashi_shop.View.GioHang.GioHangActivity;
 import com.example.fashi_shop.View.SanPhamTheoDanhMuc.SanPhamTheoDanhMucActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
@@ -79,6 +80,13 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
 
         MenuItem itemGioHang = menu.findItem(R.id.itemGioHang);
         View viewCustomGioHang = itemGioHang.getActionView();
+        viewCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(TrangChuActivity.this, GioHangActivity.class);
+               startActivity(intent);
+            }
+        });
         txtSoLuongSanPhamGioHang = viewCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
         txtSoLuongSanPhamGioHang.setText(String.valueOf(logicChiTietSanPham.countProductCart(this)));
         return true;
