@@ -1,26 +1,26 @@
 package com.example.fashi_shop.View.ChiTietSanPham;
 
-import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuCompat;
+import androidx.core.view.MenuItemCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.fashi_shop.Model.Brand;
@@ -37,7 +37,6 @@ import com.example.fashi_shop.service.ProductService;
 import com.example.fashi_shop.utils.ApiClient;
 import com.google.android.material.appbar.MaterialToolbar;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
@@ -45,13 +44,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity implements View.OnClickListener, ViewChiTietSanPham {
-    private ImageView image;
-    private TextView name;
-    private TextView price;
-    private TextView tvBrand;
-    private TextView tvCategory;
-    private RatingBar vote;
-    private TextView desc;
+    ImageView image;
+    TextView name, price, tvBrand, tvCategory, desc, txtSoLuongSanPhamGioHang;
+    RatingBar vote;
     ImageButton ibXemThem, ibAddToCart;
     boolean check = false;
     MaterialToolbar toolbar;
@@ -91,12 +86,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menuchitietsanpham, menu);
+        getMenuInflater().inflate(R.menu.menutrangchu, menu);
+
+        MenuItem itemGioHang = menu.findItem(R.id.itemGioHang);
+        View viewCustomGioHang = itemGioHang.getActionView();
+        txtSoLuongSanPhamGioHang = viewCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
+
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
@@ -217,6 +218,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
     @Override
     public void AddToCartSuccess() {
         Toast.makeText(this, "OK",Toast.LENGTH_SHORT).show();
+        txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
     }
 
     @Override

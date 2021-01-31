@@ -34,29 +34,30 @@ public class Cart {
         }
     }
 
-//    public List<Product> loadProductCart() {
-//        List<Product> products = new ArrayList<>();
-//
-//        String query = "SELECT * FROM " + DataProduct.TB_GIOHANG;
-//        Cursor cursor = database.rawQuery(query, null);
-//
-//        cursor.moveToFirst();
-//
-//        while (!cursor.isAfterLast()){
-//            int id = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_IDPRODUCT));
-//            String name = cursor.getString(cursor.getColumnIndex(DataProduct.TB_GIOHANG_NAMEPRODUCT));
-//            int price = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_PRICEPRODUCT));
-//            byte[] image = cursor.getBlob(cursor.getColumnIndex(DataProduct.TB_GIOHANG_IMAGEPRODUCT));
-//
-//            Product product = new Product();
-//            product.setId(id);
-//            product.setName(name);
-//            product.setPrice(price);
-//            product.setImage_gio_hang(image);
-//
-//            products.add(product);
-//        }
-//        return products;
-//    }
+    public List<Product> loadProductCart() {
+        List<Product> products = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DataProduct.TB_GIOHANG;
+        Cursor cursor = database.rawQuery(query, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()){
+            int id = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_MASP));
+            String name = cursor.getString(cursor.getColumnIndex(DataProduct.TB_GIOHANG_TENSP));
+            int price = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_GIATIEN));
+            byte[] image = cursor.getBlob(cursor.getColumnIndex(DataProduct.TB_GIOHANG_HINHANH));
+
+            Product product = new Product();
+            product.setId(id);
+            product.setName(name);
+            product.setPrice(price);
+            product.setImage_gio_hang(image);
+
+            products.add(product);
+            cursor.moveToNext();
+        }
+        return products;
+    }
 
 }
