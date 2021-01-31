@@ -20,4 +20,5 @@ public  class ApiClient {
     public static CategoryService getCategoryService(){
         return RetrofitClient.getRetrofit(BASE_URL).create(CategoryService.class);
     }
+
 }

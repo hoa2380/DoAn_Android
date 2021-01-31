@@ -21,6 +21,9 @@ public interface ProductService {
     @GET("products/{id}")
     Call<ProductResponse> getProduct(@Path("id") long id);
 
+    @GET("getProductsByCategories/{id}")
+    Call<ProductsResponse> getProductsByCategories(@Path("id") long id);
+
     @POST("products/")
     Call<Void> createProduct(@Body Product product);
 

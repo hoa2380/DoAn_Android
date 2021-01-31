@@ -23,12 +23,14 @@ public class ProductAdapter extends RecyclerView.Adapter<com.example.fashi_shop.
     private static final String TAG = "ProductAdapter";
     Context context;
     List<Product> products;
+    int layout;
     ProductItemListener productItemListener;
 
-    public ProductAdapter(Context context, List<Product> products, ProductItemListener productItemListener) {
+    public ProductAdapter(Context context, List<Product> products, int layout, ProductItemListener productItemListener) {
         this.context = context;
         this.products = products;
         this.productItemListener = productItemListener;
+        this.layout = layout;
     }
 
     @NonNull
@@ -36,7 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<com.example.fashi_shop.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.item_product, parent, false);
+        View view = layoutInflater.inflate(layout, parent, false);
         ViewHolder viewHolder = new ViewHolder(view,productItemListener);
         return viewHolder;
     }
@@ -47,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<com.example.fashi_shop.
 
         Glide.with(context).load(products.get(position).image).placeholder(R.drawable.placeholder).into(holder.image);
         holder.name.setText(products.get(position).name + "");
-        holder.price.setText(formatter.format(products.get(position).price));
+        holder.price.setText(formatter.format(products.get(position).price) + "₫");
     }
 
     @Override

@@ -23,6 +23,7 @@
         <activity android:name=".View.TrangChu.TrangChuActivity"/>
         <activity android:name=".View.DangNhap.LoginActivity"/>
         <activity android:name=".View.ChiTietSanPham.ChiTietSanPhamActivity"/>
+        <activity android:name=".View.SanPhamTheoDanhMuc.SanPhamTheoDanhMucActivity"/>
     </application>
 
 </manifest>
