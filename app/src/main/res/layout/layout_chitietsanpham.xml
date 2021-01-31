@@ -207,6 +207,7 @@
             android:layout_weight="1"/>
 
         <ImageButton
+            android:id="@+id/ibAddToCart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_add_shopping_cart_white_24dp"

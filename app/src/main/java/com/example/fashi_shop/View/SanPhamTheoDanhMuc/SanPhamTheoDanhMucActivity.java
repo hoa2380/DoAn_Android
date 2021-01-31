@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fashi_shop.Adapter.ProductAdapter;
+import com.example.fashi_shop.Model.ILoadMore;
+import com.example.fashi_shop.Model.LoadMore;
 import com.example.fashi_shop.Model.Product;
 import com.example.fashi_shop.Presenter.SanPhamTheoDanhMuc.PresenterLogicSanPhamTheoDanhMuc;
 import com.example.fashi_shop.R;
@@ -97,4 +99,5 @@ public class SanPhamTheoDanhMucActivity extends AppCompatActivity implements Vie
             ;break;
         }
     }
+
 }
