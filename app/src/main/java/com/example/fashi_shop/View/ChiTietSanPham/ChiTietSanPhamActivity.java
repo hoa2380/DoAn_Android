@@ -1,5 +1,8 @@
 package com.example.fashi_shop.View.ChiTietSanPham;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,15 +14,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuCompat;
+import androidx.core.view.MenuItemCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.fashi_shop.Model.Brand;
 import com.example.fashi_shop.Model.Category;
 import com.example.fashi_shop.Model.Product;
+import com.example.fashi_shop.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.fashi_shop.R;
 import com.example.fashi_shop.responses.BrandResponse;
 import com.example.fashi_shop.responses.CategoryResponse;
@@ -30,25 +37,25 @@ import com.example.fashi_shop.service.ProductService;
 import com.example.fashi_shop.utils.ApiClient;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.io.ByteArrayOutputStream;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChiTietSanPhamActivity extends AppCompatActivity {
-    private ImageView image;
-    private TextView name;
-    private TextView price;
-    private TextView tvBrand;
-    private TextView tvCategory;
-    private RatingBar vote;
-    private TextView desc;
-    ImageButton ibXemThem;
+public class ChiTietSanPhamActivity extends AppCompatActivity implements View.OnClickListener, ViewChiTietSanPham {
+    ImageView image;
+    TextView name, price, tvBrand, tvCategory, desc, txtSoLuongSanPhamGioHang;
+    RatingBar vote;
+    ImageButton ibXemThem, ibAddToCart;
     boolean check = false;
     MaterialToolbar toolbar;
 
     ProductService productService;
     BrandService brandService;
     CategoryService categoryService;
+    Product productCart;
+    PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         vote = findViewById(R.id.product_detail_vote);
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
+        ibAddToCart = findViewById(R.id.ibAddToCart);
         setSupportActionBar(toolbar);
 
         productService = ApiClient.getProductService();
@@ -71,24 +79,33 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
 
         loadProduct(getIntent().getLongExtra("productID", 0));
+
+        presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
+        ibAddToCart.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menuchitietsanpham,menu);
+        getMenuInflater().inflate(R.menu.menutrangchu, menu);
+
+        MenuItem itemGioHang = menu.findItem(R.id.itemGioHang);
+        View viewCustomGioHang = itemGioHang.getActionView();
+        txtSoLuongSanPhamGioHang = viewCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
+
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
-    void loadCategory(int id){
+    void loadCategory(int id) {
         categoryService.getCategory(id).enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Category category = response.body().category;
                     System.out.println(category);
                     tvCategory.setText(category.name);
@@ -102,11 +119,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    void loadBrand(int id){
+    void loadBrand(int id) {
         brandService.getBrands(id).enqueue(new Callback<BrandResponse>() {
             @Override
             public void onResponse(Call<BrandResponse> call, Response<BrandResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Brand brand = response.body().brand;
                     System.out.println(brand);
                     tvBrand.setText(brand.name);
@@ -120,13 +137,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    void loadProduct(long id) {
+    public void loadProduct(long id) {
         productService.getProduct(id).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
                     Product product = response.body().product;
-                    System.out.println(product);
+                    productCart = product;
                     Glide.with(getApplicationContext()).load(product.image).into(image);
                     name.setText(product.name);
                     price.setText(product.price + " ₫");
@@ -142,10 +159,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 check = !check;
-                                if (check ) {
+                                if (check) {
                                     desc.setText(product.desc);
                                     ibXemThem.setImageDrawable(getIconXemThem(R.drawable.ic_keyboard_arrow_up_black_24dp));
-                                }else {
+                                } else {
                                     desc.setText(product.desc.substring(0, 100));
                                     ibXemThem.setImageDrawable(getIconXemThem(R.drawable.ic_keyboard_arrow_down_black_24dp));
                                 }
@@ -165,14 +182,47 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    private Drawable getIconXemThem(int idDrawable){
+    private Drawable getIconXemThem(int idDrawable) {
         Drawable drawable;
-        if (Build.VERSION.SDK_INT > 21){
+        if (Build.VERSION.SDK_INT > 21) {
             drawable = ContextCompat.getDrawable(this, idDrawable);
-        }else {
+        } else {
             drawable = getResources().getDrawable(idDrawable);
         }
         return drawable;
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.ibAddToCart:
+                ImageView imageView = findViewById(R.id.ivItemDetailImage);
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                System.out.println("productcart: " + productCart);
+//                ibAddToCart.setImageBitmap(bitmap);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                byte[] imageProductCart = byteArrayOutputStream.toByteArray();
+                productCart.setImage_gio_hang(imageProductCart);
+               presenterLogicChiTietSanPham.addToCart(productCart, this);
+                break;
+        }
+    }
+
+    @Override
+    public void LoadProduct(Product product) {
+
+    }
+
+    @Override
+    public void AddToCartSuccess() {
+        Toast.makeText(this, "OK",Toast.LENGTH_SHORT).show();
+        txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
+    }
+
+    @Override
+    public void AddToCartFail() {
+        Toast.makeText(this, "Đã có trong giỏ á!",Toast.LENGTH_SHORT).show();
+    }
 }

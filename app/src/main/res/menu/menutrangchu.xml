@@ -16,7 +16,7 @@
         android:title="Giỏ hàng"
         android:icon="@drawable/ic_shopping_cart_white_24dp"
         app:showAsAction="always"
-        android:actionLayout="@layout/custom_item_giohang"
+        app:actionLayout="@layout/custom_item_giohang"
         />
 
     <item

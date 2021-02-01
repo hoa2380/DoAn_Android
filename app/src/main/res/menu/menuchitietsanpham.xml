@@ -12,7 +12,6 @@
         />
 
     <item
-        android:id="@+id/itemGioHang"
         android:title="Giỏ hàng"
         android:icon="@drawable/ic_shopping_cart_white_24dp"
         app:showAsAction="always"

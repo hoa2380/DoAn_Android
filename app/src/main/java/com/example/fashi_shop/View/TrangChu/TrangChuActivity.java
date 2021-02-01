@@ -14,14 +14,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.fashi_shop.Adapter.CategoryAdapter;
 import com.example.fashi_shop.Adapter.ViewPagerAdapter;
 import com.example.fashi_shop.Model.Category;
+import com.example.fashi_shop.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.fashi_shop.Presenter.TrangChu.XuLyMenu.PresenterLogicXuLyMenu;
 import com.example.fashi_shop.R;
+import com.example.fashi_shop.View.GioHang.GioHangActivity;
 import com.example.fashi_shop.View.SanPhamTheoDanhMuc.SanPhamTheoDanhMucActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
@@ -36,6 +39,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     ListView listView;
+    TextView txtSoLuongSanPhamGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +68,27 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
         tabLayout.setupWithViewPager(viewPager);
 
         PresenterLogicXuLyMenu logicXuLyMenu = new PresenterLogicXuLyMenu(this);
+
         logicXuLyMenu.LayDanhSachMenu();
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        PresenterLogicChiTietSanPham logicChiTietSanPham = new PresenterLogicChiTietSanPham();
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
+
+        MenuItem itemGioHang = menu.findItem(R.id.itemGioHang);
+        View viewCustomGioHang = itemGioHang.getActionView();
+        viewCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(TrangChuActivity.this, GioHangActivity.class);
+               startActivity(intent);
+            }
+        });
+        txtSoLuongSanPhamGioHang = viewCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        txtSoLuongSanPhamGioHang.setText(String.valueOf(logicChiTietSanPham.countProductCart(this)));
         return true;
     }
 
