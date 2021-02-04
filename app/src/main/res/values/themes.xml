@@ -21,4 +21,8 @@
         <item name="colorControlActivated">@android:color/holo_red_light</item>
     </style>
 
+    <declare-styleable name="PasswordEditText">
+        <attr name="useStrike" format="boolean"></attr>
+    </declare-styleable>
+
 </resources>

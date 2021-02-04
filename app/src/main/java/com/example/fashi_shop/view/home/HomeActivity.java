@@ -24,6 +24,7 @@ import com.example.fashi_shop.presenter.product_detail.PresenterProductDetail;
 import com.example.fashi_shop.presenter.home.handle_menu.PresenterHandleMenu;
 import com.example.fashi_shop.R;
 import com.example.fashi_shop.view.cart.CartActivity;
+import com.example.fashi_shop.view.login.LoginActivity;
 import com.example.fashi_shop.view.product_by_categories.ProductByCategoriesActivity;
 import com.example.fashi_shop.view.search.SearchActivity;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -99,6 +100,12 @@ public class HomeActivity extends AppCompatActivity implements ViewHandleMenu, V
     public boolean onOptionsItemSelected(MenuItem item) {
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
+        }
+        int id = item.getItemId();
+        switch (id){
+            case R.id.itemDangNhap:
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
         }
         return true;
     }
