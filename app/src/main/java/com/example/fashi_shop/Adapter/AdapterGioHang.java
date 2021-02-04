@@ -6,12 +6,15 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.example.fashi_shop.Model.Cart.Cart;
 import com.example.fashi_shop.Model.Product;
 import com.example.fashi_shop.R;
 
@@ -33,14 +36,18 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
 
     public class ViewHolderGioHang extends RecyclerView.ViewHolder {
         ImageView imageProduct, imageDelete;
-        TextView name, price;
+        ImageButton quantityUp, quantityDown;
+        TextView name, price, quantity;
 
         public ViewHolderGioHang(View itemView) {
             super(itemView);
             imageProduct = itemView.findViewById(R.id.item_image_cart);
             imageDelete =  itemView.findViewById(R.id.imDeleteItem);
+            quantityUp = itemView.findViewById(R.id.ibQuantityUp);
+            quantityDown = itemView.findViewById(R.id.ibQuantityDown);
             name = itemView.findViewById(R.id.item_product_name_cart);
             price = itemView.findViewById(R.id.item_product_price_cart);
+            quantity = itemView.findViewById(R.id.txtQuantity);
         }
     }
 
@@ -63,6 +70,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
         NumberFormat formatter = new DecimalFormat("#,###");
         holder.price.setText(formatter.format(product.getPrice()) + "₫");
 
+
         Bitmap bitmapImageCart = BitmapFactory.decodeByteArray(product.getImage_gio_hang(), 0, product.getImage_gio_hang().length);
         holder.imageProduct.setImageBitmap(bitmapImageCart);
 
@@ -70,7 +78,12 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
         holder.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Cart cart = new Cart();
+                cart.ConnectSQL(context);
+                cart.DeleteProduct((int)v.getTag());
+                products.remove(position);
+                Toast.makeText(context, "Đã xóa sản phẩm khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+                notifyDataSetChanged();
             }
         });
     }

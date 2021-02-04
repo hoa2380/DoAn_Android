@@ -40,6 +40,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
     ActionBarDrawerToggle drawerToggle;
     ListView listView;
     TextView txtSoLuongSanPhamGioHang;
+    boolean onPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,5 +116,20 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu{
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (onPause){
+            PresenterLogicChiTietSanPham logicChiTietSanPham = new PresenterLogicChiTietSanPham();
+            txtSoLuongSanPhamGioHang.setText(String.valueOf(logicChiTietSanPham.countProductCart(this)));
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onPause = true;
     }
 }

@@ -14,12 +14,12 @@ public class Cart {
 
     SQLiteDatabase database;
 
-    public void ConnectSQL(Context context){
+    public void ConnectSQL(Context context) {
         DataProduct dataProduct = new DataProduct(context);
         database = dataProduct.getWritableDatabase();
     }
 
-    public boolean addCartItem(Product product){
+    public boolean addCartItem(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataProduct.TB_GIOHANG_MASP, product.getId());
         contentValues.put(DataProduct.TB_GIOHANG_TENSP, product.getName());
@@ -27,7 +27,7 @@ public class Cart {
         contentValues.put(DataProduct.TB_GIOHANG_HINHANH, product.getImage_gio_hang());
 
         long id = database.insert(DataProduct.TB_GIOHANG, null, contentValues);
-        if (id > 0 ) {
+        if (id > 0) {
             return true;
         } else {
             return false;
@@ -42,7 +42,7 @@ public class Cart {
 
         cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             int id = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_MASP));
             String name = cursor.getString(cursor.getColumnIndex(DataProduct.TB_GIOHANG_TENSP));
             int price = cursor.getInt(cursor.getColumnIndex(DataProduct.TB_GIOHANG_GIATIEN));
@@ -58,6 +58,15 @@ public class Cart {
             cursor.moveToNext();
         }
         return products;
+    }
+
+    public boolean DeleteProduct(int id) {
+      int check =  database.delete(DataProduct.TB_GIOHANG, DataProduct.TB_GIOHANG_MASP + "=" + id, null);
+      if (check > 0){
+            return true;
+      }else {
+          return false;
+      }
     }
 
 }

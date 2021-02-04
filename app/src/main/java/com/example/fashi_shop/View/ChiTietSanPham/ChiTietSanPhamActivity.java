@@ -1,5 +1,6 @@
 package com.example.fashi_shop.View.ChiTietSanPham;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,6 +29,8 @@ import com.example.fashi_shop.Model.Category;
 import com.example.fashi_shop.Model.Product;
 import com.example.fashi_shop.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.fashi_shop.R;
+import com.example.fashi_shop.View.GioHang.GioHangActivity;
+import com.example.fashi_shop.View.TrangChu.TrangChuActivity;
 import com.example.fashi_shop.responses.BrandResponse;
 import com.example.fashi_shop.responses.CategoryResponse;
 import com.example.fashi_shop.responses.ProductResponse;
@@ -86,10 +89,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        PresenterLogicChiTietSanPham logicChiTietSanPham = new PresenterLogicChiTietSanPham();
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
 
         MenuItem itemGioHang = menu.findItem(R.id.itemGioHang);
         View viewCustomGioHang = itemGioHang.getActionView();
+        viewCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
         txtSoLuongSanPhamGioHang = viewCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
         txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
 
@@ -217,12 +228,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
 
     @Override
     public void AddToCartSuccess() {
-        Toast.makeText(this, "OK",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
         txtSoLuongSanPhamGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.countProductCart(this)));
     }
 
     @Override
     public void AddToCartFail() {
-        Toast.makeText(this, "Đã có trong giỏ á!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng",Toast.LENGTH_SHORT).show();
     }
 }
