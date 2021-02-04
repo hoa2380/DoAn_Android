@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -31,6 +32,7 @@ import com.example.fashi_shop.Presenter.ChiTietSanPham.PresenterLogicChiTietSanP
 import com.example.fashi_shop.R;
 import com.example.fashi_shop.View.GioHang.GioHangActivity;
 import com.example.fashi_shop.View.TrangChu.TrangChuActivity;
+import com.example.fashi_shop.View.checkout.CheckoutActivity;
 import com.example.fashi_shop.responses.BrandResponse;
 import com.example.fashi_shop.responses.CategoryResponse;
 import com.example.fashi_shop.responses.ProductResponse;
@@ -51,6 +53,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
     TextView name, price, tvBrand, tvCategory, desc, txtSoLuongSanPhamGioHang;
     RatingBar vote;
     ImageButton ibXemThem, ibAddToCart;
+    Button btnBuyOne;
     boolean check = false;
     MaterialToolbar toolbar;
 
@@ -74,6 +77,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
         desc = findViewById(R.id.product_detail_desc);
         ibXemThem = findViewById(R.id.ibXemThem);
         ibAddToCart = findViewById(R.id.ibAddToCart);
+        btnBuyOne = findViewById(R.id.btnBuyOne);
         setSupportActionBar(toolbar);
 
         productService = ApiClient.getProductService();
@@ -85,6 +89,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
 
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         ibAddToCart.setOnClickListener(this);
+        btnBuyOne.setOnClickListener(this);
     }
 
     @Override
@@ -207,6 +212,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.btnBuyOne:
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, CheckoutActivity.class);
+                startActivity(intent);
+                break;
             case R.id.ibAddToCart:
                 ImageView imageView = findViewById(R.id.ivItemDetailImage);
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
