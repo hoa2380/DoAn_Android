@@ -12,11 +12,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">#FFBF00</item>
         <item name="colorControlActivated">@android:color/holo_red_light</item>
     </style>
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="useStrike" format="boolean"></attr>
+    </declare-styleable>
 
 </resources>

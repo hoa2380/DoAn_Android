@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.GioHang.GioHangActivity">
+    tools:context=".view.cart.CartActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/btBuy"
+        android:id="@+id/btnBuy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mua ngay"
