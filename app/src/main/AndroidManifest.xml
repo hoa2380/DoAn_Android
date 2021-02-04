@@ -25,6 +25,7 @@
         <activity android:name=".View.ChiTietSanPham.ChiTietSanPhamActivity" />
         <activity android:name=".View.SanPhamTheoDanhMuc.SanPhamTheoDanhMucActivity" />
         <activity android:name=".View.GioHang.GioHangActivity" />
+        <activity android:name=".View.checkout.CheckoutActivity"/>
     </application>
 
 </manifest>

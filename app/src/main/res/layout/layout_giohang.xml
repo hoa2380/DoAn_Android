@@ -31,7 +31,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/btBuy"
+        android:id="@+id/btnBuy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mua ngay"

@@ -1,7 +1,10 @@
 package com.example.fashi_shop.View.GioHang;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,14 +14,16 @@ import com.example.fashi_shop.Adapter.AdapterGioHang;
 import com.example.fashi_shop.Model.Product;
 import com.example.fashi_shop.Presenter.GioHang.PresenterLogicGioHang;
 import com.example.fashi_shop.R;
+import com.example.fashi_shop.View.checkout.CheckoutActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.List;
 
-public class GioHangActivity extends AppCompatActivity implements ViewGioHang{
+public class GioHangActivity extends AppCompatActivity implements ViewGioHang, View.OnClickListener {
     RecyclerView recyclerView;
     PresenterLogicGioHang presenterLogicGioHang;
     MaterialToolbar toolbar;
+    Button btnBuy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +36,10 @@ public class GioHangActivity extends AppCompatActivity implements ViewGioHang{
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recyclerGioHang);
+        btnBuy = findViewById(R.id.btnBuy);
         presenterLogicGioHang = new PresenterLogicGioHang(this);
         presenterLogicGioHang.loadProductCart(this);
+        btnBuy.setOnClickListener(this);
     }
 
     @Override
@@ -42,5 +49,16 @@ public class GioHangActivity extends AppCompatActivity implements ViewGioHang{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterGioHang);
         System.out.println(products);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.btnBuy:
+                Intent intent = new Intent(GioHangActivity.this, CheckoutActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
